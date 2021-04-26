@@ -1,43 +1,10 @@
-# Vue-	
+# VueX
 	vuex官方解释
 什么是vuex？
 	Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状
 态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 devtools extension (opens new window)，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。
 
 什么是“状态管理模式”？
-	<!-- view -->
-	<template>
-	  <div id="app">
-	    <h2>{{message}}</h2>
-	    <h2>{{counter}}</h2>
-	    <button @click="add()">+</button>
-	    <button @click="sub()">-</button>
-	  </div>
-	</template>
-	<script>
-	export default {
-	  name: 'App',
-	  components: {
-	  },
-	  // state
-	  data() {
-	    return {
-	      message:"App组件",
-	      counter:0
-	    }
-	  },
-	  // actions
-	  methods: {
-	    add(){
-	      this.counter++
-	    },
-	    sub(){
-	      this.counter--
-	    }
-	  },
-	}
-	</script>
-	
 
 
 这个状态自管理应用包含以下几个部分：
