@@ -3,6 +3,8 @@ import App from "./App";
 
 import axios from "axios";
 
+import { request } from "./network/request";
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
@@ -10,8 +12,7 @@ new Vue({
   el: "#app",
   render: h => h(App)
 });
-
-// axios默认为get请求
+// axios默认为get请求 
 axios
   .get("https://api.coindesk.com/v1/bpi/currentprice.json")
   // .then(function(response) {
