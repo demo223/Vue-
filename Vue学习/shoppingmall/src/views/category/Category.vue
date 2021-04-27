@@ -1,12 +1,12 @@
-// 个人界面
+// 分类界面
 <template>
     <div>
-        <h2>Profile界面</h2>
+        <h2>Category界面</h2>
     </div>
 </template>
 <script>
 export default {
-    name:'Profile',
+    name:'Category',
 
 }
 </script>

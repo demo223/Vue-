@@ -1,15 +1,15 @@
-// 个人界面
+// 首页界面
 <template>
     <div>
-        <h2>Profile界面</h2>
+        <h2>Home界面</h2>
     </div>
 </template>
 <script>
 export default {
-    name:'Profile',
-
+    name:'Home',
 }
 </script>
+
 <style>
     
 </style>

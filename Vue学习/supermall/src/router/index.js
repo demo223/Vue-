@@ -1,3 +1,11 @@
+import Vue from "vue"
+import VueRouter from "vue-router"
+
+const Home = () => import("../views/home/Home")
+const Category = () => import("../views/category/Category")
+const Cart = () => import("../views/cart/Cart")
+const Profile = () => import("../views/profile/Profile")
+
 // 1.安装router插件
 Vue.use(VueRouter)
 
@@ -5,7 +13,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "",
-    redirect: "/home",// 重定向
+    redirect: "/home", // 重定向
   },
   {
     path: "/home",
@@ -28,7 +36,6 @@ const routes = [
 const router = VueRouter({
   routes,
   mode: "history", //将hash模式改为history模式
-  linkActiveClass: "active",
 })
 
 // 导出router
