@@ -1,6 +1,7 @@
 <template>
   <tab-bar>
-    <tab-bar-item path="/home">
+    <tab-bar-item path="/home"> 
+    //这里面也可以添加例如activeColor='blue'来设置颜色为蓝色
       <img
         slot="item-icon"
         src="../../../assets/img/tabbar/home.png"

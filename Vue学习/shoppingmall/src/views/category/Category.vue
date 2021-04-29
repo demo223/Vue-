@@ -1,7 +1,7 @@
 // 分类界面
 <template>
     <div>
-        <h2>Category界面</h2>
+        <h2>分类</h2>
     </div>
 </template>
 <script>

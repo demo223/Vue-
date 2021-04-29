@@ -12,9 +12,10 @@
 <script>
 export default {
   name: "TabBarItem",
-  props: {
+  props: {  //父组件里面的属性
     path: String,
     activeColor: {
+      //如果在父组件中没有设置activeColor，则默认为red
       type: String,
       default: "red",
     },
@@ -26,6 +27,7 @@ export default {
   },
   computed: {
     isActive() {
+      // 判断当前活跃路由是否和当前路径一致
       return this.$route.path.indexOf(this.path) !== -1;
     },
     activeStyle() {
@@ -34,6 +36,7 @@ export default {
   },
   methods: {
     itemClick() {
+      // this.path为router里面index.js的routes里面的各个组件的path
       this.$router.replace(this.path);
     },
   },

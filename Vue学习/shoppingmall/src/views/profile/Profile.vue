@@ -1,10 +1,10 @@
 // 个人界面
 <template>
     <div>
-        <h2>Profile界面</h2>
+        <h2>我的</h2>
     </div>
 </template>
-<script>
+<script></script>
 export default {
     name:'Profile',
 
