@@ -6,4 +6,3 @@ export function getHomeMultidata() {
     url: "/home/multidata",
   })
 }
-
