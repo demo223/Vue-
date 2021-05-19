@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>代码测试</title>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>firstName的结果</h2>
+      {{firstName}}
+      <h2>lastName的结果</h2>
+      {{lastName}}
+      <h2>fullName的结果</h2>
+      {{fullName}}
+      <!-- <div>
+        <label for="birthday"></label>
+        <input type="date" name="生日" id="birthday" value="1999-07-22" />
+      </div> -->
+      请输入你的名字：<input type="text" v-model.lazy="name">
+        <h3>你的名字：{{name}}</h3>
+      请输入数据：<input type="number" v-model.number="num">
+        <h3>数据：{{num}}</h3>
+        <h3>数据类型：{{typeof(num)}}</h3>
+      
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          firstName: "Foo",
+          lastName: "Bar",
+          name:'',
+          num:'',
+        },
+        computed: {
+          fullName: {
+            // getter
+            get: function () {
+              return this.firstName + " " + this.lastName
+            },
+            // setter
+            set: function (newValue) {
+              var names = newValue.split(" ")
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            },
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
