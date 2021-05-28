@@ -161,15 +161,65 @@
   }
 */
 
-//arguments()对象
-let f = function (a, b, c) {
-  console.log(arguments[0])
-  console.log(arguments[1])
-  console.log(arguments[2])
-  console.log(arguments)
-}
-f(1,2,3)
-// 1
-// 2
-// 3
-// [Arguments] { '0': 1, '1': 2, '2': 3 }
+// 浏览器有两个隐藏的参数，一个是this，另一个是arguments
+// //arguments()对象
+// let f = function (a, b, c) {
+//   console.log(arguments[0])
+//   console.log(arguments[1])
+//   console.log(arguments[2])
+//   console.log(arguments)
+// }
+// f(1,2,3)
+// // 1
+// // 2
+// // 3
+// // [Arguments] { '0': 1, '1': 2, '2': 3 }
+
+// //call()和apply()的使用
+// //call()和apply()的第一个参数都是调用这个函数的对象
+// let obj1 = { name: "obj1" }
+// let obj2 = { name: "obj2" }
+// function fun() {
+//   console.log(this.name)
+// }
+// function add(a, b) {
+//   console.log(a+b)
+// }
+// let obj = {
+//   name: "周岐",
+//   a: 1,
+//   b: 2,
+//   c: 3,
+// }
+
+// fun.call(obj) //周岐
+// fun.apply(obj) //周岐
+// add.call(obj, obj.a, obj.b) //3
+// //apply()方法与call()方法类似，只不过传入的第二个参数需要以数组的形式提供
+// add.apply(obj, [obj.b, obj.c])  //5
+// add.apply(obj, [2, 6])  //8
+
+// // bind()的使用
+// // bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数。
+// let obj = {
+//   name: 'zq',
+//   age:22
+// }
+// let t = new Date()
+// t.getTime()
+// // let d = t.getTime
+// // console.log(d())  //this is not a Date object.
+// // 因为getTime方法内部的this，绑定Date对象的实例，
+// // 赋给变量print以后，内部的this已经不指向Date对象的实例了。
+// //
+// //使用bind()可以解决上述问题
+
+// //使用函数处理数组
+// const sum = (x, y) => x + y
+// const square = (x, y) => x * y
+// let arr = [1, 3, 5, 7, 9]
+// console.log(arr.reduce(sum) / arr.length) //5,计算平均值
+// console.log(arr.reduce(square)) //945
+
+let a = -12.8
+console.log(parseInt(a))

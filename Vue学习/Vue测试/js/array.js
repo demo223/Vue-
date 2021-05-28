@@ -198,3 +198,13 @@
 // //在字符串中使用[]读取字符
 // let str = 'hello'
 // console.log(str[1]) //'e'
+
+// //将字符串数组转换为数字数组
+// let strArr = ["1", "2", "3", "4", "5"]
+// let numArr = strArr.map(Number)
+// console.log(numArr) //[ 1, 2, 3, 4, 5 ]
+
+// //将数字数组转换为字符串数组
+// let num = [1, 3, 5, 2, 6]
+// let str = num.map(String)
+// console.log(str) //[ '1', '3', '5', '2', '6' ]
