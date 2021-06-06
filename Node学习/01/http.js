@@ -15,7 +15,9 @@ server.on("request", (request, response) => {
     response.write("End of response")   //这里中文会出现乱码
     response.end()  //这里一定要加这一句！！！
     */
-  response.end("Send response\nEnd of response") //一般不使用上面的写法
+  response.setHeader("Content-Type", "text/plain;charset=utf-8")
+  //可以解决中文输出乱码的问题
+  response.end("Send response\nEnd of response\n可以解决中文输出乱码的问题") //一般不使用上面的写法
 })
 //4.绑定端口号，启动服务器
 server.listen(3000, () => {
