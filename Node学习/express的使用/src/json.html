@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>服务端响应json数据</title>
+    <style>
+      #div1 {
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">
+      <!-- 请求信息 -->
+    </div>
+
+    <script>
+      let div1 = document.getElementById("div1");
+      div1.addEventListener("mouseover", function () {
+        //当鼠标移入的时候触发事件
+        //创建对象
+        const xhr = new XMLHttpRequest();
+        //设置响应体数据类型  这里将响应体返回类型设置为json类型
+        //方法2：自动转换
+        xhr.responseType = "json";
+        //初始化 设置请求类型和url
+        xhr.open("POST", "http://localhost:3000/server");
+        // 设置请求头
+        // xhr.setRequestHeader('name','zhouqi')
+        //发送请求
+        xhr.send();
+        //事件绑定
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            //处理返回服务端返回的结果
+            // console.log(typeof xhr.response)  //xhr默认是字符串类型
+            console.log(typeof xhr.response); //object
+            //设置xhr.responseType = 'json'之后，响应体变成了object类型
+            // //方法1：手动转换
+            // let people = JSON.parse(xhr.response)
+            // div1.innerHTML = Object.keys(people)
+            //方法2：自动转换
+            div1.innerHTML = Object.keys(xhr.response);
+            div1.innerHTML = xhr.response.age;
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
