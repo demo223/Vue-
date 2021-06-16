@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>同源策略</title>
+</head>
+
+<body>
+  <button id="btn1">同源策略</button>
+
+  <script>
+    let btn1 = document.getElementById('btn1')
+    btn1.onclick = function () {
+      let xhr = new XMLHttpRequest()
+      //向服务器发送请求
+      xhr.open('GET', 'http://127.0.0.1:5000/app2')
+      xhr.send()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.response)
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

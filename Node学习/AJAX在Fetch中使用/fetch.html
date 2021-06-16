@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX在Fetch中使用</title>
+</head>
+
+<body>
+  <button id="btn1">使用Fetch获取请求</button>
+
+  <script>
+    let btn1 = document.getElementById('btn1')
+    btn1.onclick = function () {
+      fetch('http://localhost:3000/fetch', //设置url参数
+        {
+          //设置请求方法
+          method: "POST",
+          //请求头
+          headers: {
+            address: 'HuBei'
+          },
+          //请求体
+          body: {
+            username: 'admin',
+            password: 'root'
+          }
+        }).then(res =>
+        res.text()
+      ).then(res => {
+        console.log(res)
+      })
+    }
+  </script>
+</body>
+
+</html>

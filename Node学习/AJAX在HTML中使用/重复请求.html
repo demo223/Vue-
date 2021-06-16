@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>取消请求</title>
+</head>
+
+<body>
+  <button id="btn1">重复发送请求</button>
+</body>
+<script>
+  let btn1 = document.getElementById('btn1')
+  let xhr = null
+  //设置一个标识，表示是否正在发送AJAX请求
+  let isSending = false
+  //当用户连续点击btn1按钮重复发送请求
+  btn1.onclick = function () {
+    if (isSending) {
+      xhr.abort()
+    }
+    xhr = new XMLHttpRequest()
+    //此时正在发送AJAX请求
+    isSending = true
+    //设置请求方法和url
+    xhr.open("GET", "http://localhost:3000/delay");
+    xhr.send()
+    //此时发送完毕
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        //4: 请求已完成，且响应已就绪
+        isSending === 4
+      }
+    }
+  }
+</script>
+
+</html>

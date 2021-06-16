@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios发送请求</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+
+</head>
+
+<body>
+  <button id="btn1">GET</button> <br><br>
+  <button id="btn2">使用axios发送POST请求</button> <br><br>
+  <button id="btn3">使用axios发送AJAX请求</button> <br>
+
+  <script>
+    let btn1 = document.getElementById('btn1')
+    //配置url 可以简化下面的请求url
+    axios.defaults.baseURL = 'http://localhost:3000'
+
+    //get请求
+    btn1.onclick = function () {
+      axios.get('/axios', {
+        //设置url参数
+        params: {
+          id: 100,
+          vip: 200
+        },
+        //请求头信息
+        headers: {
+          name: 'zq',
+          age: 22
+        }
+      }).then(data => {
+        console.log(data)
+      })
+    }
+
+    //post请求
+    btn2.onclick = function () {
+      axios.post('/axios', //post的第一个参数是设置url
+        //第二个参数是设置请求体data
+        {
+          username: 'admin',
+          password: 'root'
+        },
+        //设置url参数
+        {
+          params: {
+            id: 'zhouqi',
+            num: 123456
+          },
+          //设置请求头
+          headers: {
+            gender: 'male',
+            height: 1.76
+          },
+        }).then(data => {
+        console.log(data)
+      })
+    }
+
+    //通用请求方法
+    btn3.onclick = function () {
+      axios({
+        //设置请求方式
+        methods: 'POST',
+        //设置url
+        url: '/axios',
+        params: {
+          vip: 003,
+          level: 25
+        },
+        //设置头信息
+        headers: {
+          a: 100,
+          b: 200
+        },
+        //设置请求体
+        data: {
+          username: 'admin',
+          password: 'root'
+        },
+        //设置请求体返回类型
+        responseType: 'json', //json是默认返回类型
+        //设置请求时间限制
+        // timeout:2000,
+      }).then(res => {
+        console.log(res)
+        console.log('响应状态码：' + res.status)
+        console.log('响应状态字符串：' + res.statusText)
+        console.log('响应头信息：')
+        console.log(res.headers)
+        console.log('响应体：')
+        console.log(res.data)
+      })
+    }
+  </script>
+</body>
+
+</html>

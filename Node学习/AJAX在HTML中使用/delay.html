@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #div1 {
+      width: 300px;
+      height: 200px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div1">
+    <!-- 请求信息 -->
+  </div>
+  <button id="btn1">点击发送请求</button>
+  <script>
+    let btn1 = document.getElementById("btn1");
+    let div1 = document.getElementById("div1");
+
+    btn1.onclick = function () {
+      //创建对象
+      const xhr = new XMLHttpRequest();
+      //超时设置 设置超时延迟为2s
+      xhr.timeout = 2000
+      //向服务器发送请求
+      //设置请求方法和url
+      xhr.open("GET", "http://localhost:3000/delay");
+      //发送请求
+      xhr.send();
+      //请求超时处理方法
+      xhr.ontimeout = function(){
+        alert('请求超时！！！')
+      }
+      //网络故障问题
+      xhr.onerror = function(){
+        alert('您的网络存在问题，请稍后再试！')
+      }
+      //事件绑定 处理服务端段返回的结果
+      xhr.onreadystatechange = function () {
+        //onreadystatechange存储函数
+        //每当 readyState 属性改变时，就会调用该函数
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          //readyState:0~4  表示状态
+          //status  表示响应状态码  200，404，。。。  2xx表示成功
+          div1.innerHTML = xhr.response;
+        }
+      };
+    };
+  </script>
+</body>
+</html>

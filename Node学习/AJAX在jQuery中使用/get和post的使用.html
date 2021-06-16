@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在jQuery中使用get和post请求</title>
+  <style>
+    #div1 {
+      width: 400px;
+      height: 200px;
+      border: 1px solid red;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+
+<body>
+
+  <div id="div1"></div>
+  <button id="btn1">GET</button> <br>
+  <button id="btn2">POST</button> <br>
+  <button id="btn3">通用方法</button>
+
+  <script>
+    //jQuery中的get请求
+    $('#btn1').click(function () {
+      $.get("http://localhost:3000/jquery", {
+          a: 100,
+          b: 200
+        },
+        function (data) {
+          console.log(data)
+          console.log(typeof data) //Object
+          let str = JSON.stringify(data)
+          console.log(typeof str) //string
+          $('#div1').text(str)
+        },
+        "json" //这里是请求的数据类型
+      );
+    });
+    //jQuery中的post请求
+    $('#btn2').click(function () {
+      $.post("http://localhost:3000/jquery", {
+          a: 100,
+          b: 200
+        },
+        function (data) {
+          console.log(data)
+          $('#div1').text(data)
+        }
+      );
+    });
+    //jQuery中的请求通用方法
+    $('#btn3').click(function () {
+      $.ajax({
+        type: "get", //请求方法
+        url: "http://localhost:3000/jquery", //请求地址
+        data: "{a:100,b:200}", //请求参数
+        dataType: "json", //响应体类型
+        success: function (res) { //请求成功回调函数
+          console.log(res) //res为响应体
+          $('#div1').text(JSON.stringify(res));
+        },
+        error: function (res) { //失败回调函数
+          alert('出错了！')
+        },
+        timeout: 2000, //设置超时时间
+        headers: { //设置请求头信息
+          c: 300,
+          d: 400
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
