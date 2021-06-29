@@ -25,7 +25,7 @@ html,body,#app,.el-container{
 
 body,
 html {
-  background-image:url('./assets/img/登陆背景.jpg');
+  background-image:url('./assets/img/登录背景.jpg');
 }
 /* 全屏铺满 */
 </style>

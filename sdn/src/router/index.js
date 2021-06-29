@@ -13,20 +13,13 @@ const Home = () => import('../components/Home.vue')
 const Welcome = () => import('../components/Welcome.vue')
 
 
-const One = () => import('../components/One.vue')
-const Two = () => import('../components/Two.vue')
-
 const User = () => import('../components/User.vue')
+const Chart = () => import('../components/Chart.vue')
+const Tuopu = () => import('../components/Tuopu.vue')
 const Port = () => import('../components/Port.vue')
-// const Rights = () => import(/* webpackChunkName: "Users_Rights_Roles" */ '../components/power/Rights.vue')
+const Mac = () => import('../components/Mac.vue')
+const Balance = () => import('../components/Balance.vue')
 
-// const Cate = () => import(/* webpackChunkName: "Cate_Params" */ '../components/goods/Cate.vue')
-
-// const GoodsList = () => import(/* webpackChunkName: "GoodsList_Add" */ '../components/goods/List.vue')
-// const Add = () => import(/* webpackChunkName: "GoodsList_Add" */ '../components/goods/Add.vue')
-
-// const Order = () => import(/* webpackChunkName: "Order_Report" */ '../components/order/Order.vue')
-// const Report = () => import(/* webpackChunkName: "Order_Report" */ '../components/report/Report.vue')
 
 
 Vue.use(VueRouter)
@@ -39,16 +32,12 @@ const routes = [
     redirect: '/Welcome',
     children: [
       { path: '/home', component: Welcome },
-      { path: '/one', component: One },
-      { path: '/two', component: Two },
+      { path: '/chart', component: Chart },
+      { path: '/tuopu', component: Tuopu },
       { path: '/user', component: User },
       { path: '/port', component: Port },
-      // { path: '/rights', component: Rights },
-      // { path: '/categories', component: Cate },
-      // { path: '/goods', component: GoodsList },
-      // { path: '/goods/add', component: Add },
-      // { path: '/orders', component: Order },
-      // { path: '/reports', component: Report }
+      { path: '/mac', component: Mac },
+      { path: '/balance', component: Balance },
     ] 
   }
 

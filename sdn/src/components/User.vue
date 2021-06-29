@@ -3,7 +3,7 @@
     <!-- 面包屑导航区 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>用户设置</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 卡片视图 -->
@@ -23,8 +23,8 @@
       <el-table :data="userlist" border stripe>
         <!-- stripe: 斑马条纹
         border：边框-->
-        <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column prop="username" label="姓名"></el-table-column>
+        <el-table-column type="index" label="id"></el-table-column>
+        <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
         <el-table-column prop="mobile" label="电话"></el-table-column>
         <el-table-column prop="role_name" label="角色"></el-table-column>
@@ -178,7 +178,7 @@ export default {
         // 合法邮箱
         return callback()
       }
-      callback(new Error('请输入合法邮箱'))
+      callback(new Error('请输入合法的邮箱'))
     }
     // 自定义手机号规则
     var checkMobile = (rule, value, callback) => {
@@ -374,7 +374,7 @@ export default {
         return this.$message.info('已取消删除')
       }
       const { data: res } = await this.$http.delete('users/' + id)
-      if (res.meta.status !== 200) return this.$message.error('删除用户失败！')
+      if (res.meta.status !== 200) return this.$message.error('删除用户失败！(可能用户不存在或已被删除)')
       this.$message.success('删除用户成功！')
       this.getUserList()
     },

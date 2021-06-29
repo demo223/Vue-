@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <el-header>
       <div>
-        <img src="../assets/img/企鹅.jpg" alt />
+        <img src="../assets/img/登录头像.png" alt='当前用户' />
         <span id="theme">校园网的负载均衡管理系统</span>
       </div>
       <el-button type="info" @click="logout">登出</el-button>
@@ -44,11 +44,11 @@
               <i class="el-icon-menu"></i>
               <span slot="title">用户设置</span>
             </el-menu-item>
-            <el-menu-item index="2" id="one" @click="oneClick">
+            <el-menu-item index="2" id="chart" @click="chartClick">
               <i class="el-icon-menu"></i>
-              <span slot="title">参数设置</span>
+              <span slot="title">流量监控</span>
             </el-menu-item>
-            <el-menu-item index="3" @click="twoClick">
+            <el-menu-item index="3" id='tuopu' @click="tuopuClick">
               <i class="el-icon-menu"></i>
               <span slot="title">拓扑生成</span>
             </el-menu-item>
@@ -79,11 +79,11 @@
               <i class="el-icon-setting"></i>
               <span slot="title">匹配端口</span>
             </el-menu-item>
-            <el-menu-item index="5">  
+            <el-menu-item index="5" id="mac" @click="macClick">  
               <i class="el-icon-setting"></i>
               <span slot="title">匹配Mac地址</span>
             </el-menu-item>
-            <el-menu-item index="6">
+            <el-menu-item index="6" id="balance" @click="balanceClick">
               <i class="el-icon-setting"></i>
               <span slot="title">负载均衡</span>
             </el-menu-item>
@@ -113,14 +113,20 @@ export default {
     userClick() {
       this.$router.push('/user')
     },
-    oneClick() {
-      this.$router.push('/one')
+    chartClick() {
+      this.$router.push('/chart')
     },
-    twoClick() {
-      this.$router.push('/two')
+    tuopuClick() {
+      this.$router.push('/tuopu')
     },
     portClick() {
       this.$router.push('/port')
+    },
+    macClick() {
+      this.$router.push('/mac')
+    },
+    balanceClick() {
+      this.$router.push('/balance')
     },
   },
 }
@@ -158,7 +164,8 @@ export default {
   }
 }
 .el-main {
-  background-color: #eaedf1;
+  // background-color: #eaedf1;
+  background-color:skyblue
 }
 .iconfont {
   margin-right: 10px;

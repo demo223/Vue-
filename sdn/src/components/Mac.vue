@@ -1,19 +1,22 @@
 <template>
   <div id="main">
-    <el-form id="port_form" ref="form" :model="form" label-width="100px">
+    <el-form id="mac_form" ref="form" :model="form" label-width="120px">
       <el-form-item label="交换机名称">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
-      <el-form-item label="输入端口">
-        <el-input v-model="form.in"></el-input>
+      <el-form-item label="源Mac地址">
+        <el-input v-model="form.origin"></el-input>
       </el-form-item>
-      <el-form-item label="输出端口">
-        <el-input v-model="form.out"></el-input>
+      <el-form-item label="目的Mac地址">
+        <el-input v-model="form.title"></el-input>
       </el-form-item>
-      <el-form-item label="活动选择">
+      <el-form-item label="输出端口号">
+        <el-input v-model="form.portNum"></el-input>
+      </el-form-item>
+      <el-form-item label="执行动作">
         <el-select v-model="form.region" placeholder="执行动作">
-          <el-option label="丢包" value="shanghai"></el-option>
-          <el-option label="转发" value="beijing"></el-option>
+          <el-option label="丢包" value="diubao"></el-option>
+          <el-option label="转发" value="zhuanfa"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -28,14 +31,11 @@ export default {
   data() {
     return {
       form: {
-        in: '',
+        name: '',
+        origin: '',
+        title: '',
+        portNum: '',
         region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
       },
     }
   },
@@ -59,12 +59,17 @@ export default {
   /* background-image: url('../assets/img/登陆背景.jpg'); */
 }
 
-#port_form {
-  width: 600px;
-  height: 400px;
+#mac_form {
+  width: 800px;
+  height: 450px;
   margin-top: 100px;
   padding: 50px 20px;
   background-color: rgba(275,275,275,0.5);
 }
 
+/* 按钮区域 */
+.btns {
+  display: flex;
+  justify-content: center; /* 居中排列 */
+}
 </style>
