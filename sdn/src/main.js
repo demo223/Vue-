@@ -24,10 +24,8 @@ Vue.config.productionTip = false
 import axios from 'axios'
 // 配置请求根路径
 // 本机地址
-// axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 远程后台地址
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
-// axios.defaults.baseURL = 'http://106.12.11.162:8888/api/private/v1/login'
 Vue.prototype.$http = axios
 
 // 在request 拦截器中, 展示进度条 NProgress.start()

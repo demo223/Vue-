@@ -10,9 +10,12 @@
       <el-form-item label="输出端口">
         <el-input v-model="form.out"></el-input>
       </el-form-item>
-      <el-form-item label="活动选择">
-        <el-select v-model="form.region" placeholder="执行动作">
-          <el-option label="丢包" value="shanghai"></el-option>
+      <el-form-item label="优先级">
+        <el-input v-model="form.priority"></el-input>
+      </el-form-item>
+      <el-form-item label="执行动作">
+        <el-select v-model="form.region" placeholder="丢包/转发">
+          <el-option label="丢弃" value="shanghai"></el-option>
           <el-option label="转发" value="beijing"></el-option>
         </el-select>
       </el-form-item>
@@ -36,6 +39,7 @@ export default {
         type: [],
         resource: '',
         desc: '',
+        priority:''
       },
     }
   },
@@ -61,7 +65,7 @@ export default {
 
 #port_form {
   width: 600px;
-  height: 400px;
+  height: 420px;
   margin-top: 100px;
   padding: 50px 20px;
   background-color: rgba(275,275,275,0.5);

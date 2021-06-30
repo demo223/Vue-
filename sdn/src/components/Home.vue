@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <el-header>
       <div>
-        <img src="../assets/img/登录头像.png" alt='当前用户' />
+        <img src="../assets/img/登录头像.png" alt="当前用户" />
         <span id="theme">校园网的负载均衡管理系统</span>
       </div>
       <el-button type="info" @click="logout">登出</el-button>
@@ -17,74 +17,34 @@
         <el-col :span="12">
           <!-- <h5>自定义颜色</h5> -->
           <el-menu
-            default-active="2"
+            default-active="$route.path"
             class="el-menu-vertical-demo"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="skyblue"
           >
-            <!-- <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span id="one" @click="oneClick">导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">
-            <i class="el-icon-location"></i>
-            选项1
-            </el-menu-item>
-          <el-menu-item index="1-2">
-            <i class="el-icon-location"></i>
-            选项2
-            </el-menu-item>
-        </el-menu-item-group>
-            </el-submenu>-->
             <el-menu-item index="1" id="user" @click="userClick">
-              <i class="el-icon-menu"></i>
-              <span slot="title">用户设置</span>
+              <i class="el-icon-user-solid"></i>
+              <span slot="title">用户管理</span>
             </el-menu-item>
             <el-menu-item index="2" id="chart" @click="chartClick">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-view"></i>
               <span slot="title">流量监控</span>
             </el-menu-item>
-            <el-menu-item index="3" id='tuopu' @click="tuopuClick">
-              <i class="el-icon-menu"></i>
-              <span slot="title">拓扑生成</span>
+            <el-menu-item index="3" id="tuopu" @click="tuopuClick">
+              <i class="el-icon-tickets"></i>
+              <span slot="title">拓扑信息</span>
             </el-menu-item>
-            <!-- <el-menu-item index="4">
-              <i class="el-icon-document"></i>
-              <span slot="title">路由调度</span>
-            </el-menu-item>-->
-            <!-- <el-menu-item index="5">
-              <i class="el-icon-setting"></i>
-              <span slot="title">流表下发</span>
-            </el-menu-item>-->
-            <!-- <el-submenu index="5">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>流表下发</span>
-              </template>
-              <el-menu-item-group>
-                <template slot="title">分组一</template>
-                <el-menu-item index="1-1">
-                  <i class="el-icon-location"></i>匹配端口
-                  </el-menu-item>
-                <el-menu-item index="1-2">
-                  <i class="el-icon-location"></i>匹配Mac地址
-                  </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu> -->
             <el-menu-item index="4" @click="portClick">
-              <i class="el-icon-setting"></i>
+              <i class="el-icon-s-operation"></i>
               <span slot="title">匹配端口</span>
             </el-menu-item>
-            <el-menu-item index="5" id="mac" @click="macClick">  
-              <i class="el-icon-setting"></i>
-              <span slot="title">匹配Mac地址</span>
+            <el-menu-item index="5" id="ip" @click="ipClick">
+              <i class="el-icon-s-platform"></i>
+              <span slot="title">匹配ip地址</span>
             </el-menu-item>
             <el-menu-item index="6" id="balance" @click="balanceClick">
-              <i class="el-icon-setting"></i>
+              <i class="el-icon-rank"></i>
               <span slot="title">负载均衡</span>
             </el-menu-item>
           </el-menu>
@@ -100,6 +60,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      
+    }
+  },
   // created () {
   //   this.getMenuList()
   //   this.activePath = window.sessionStorage.getItem('activePath')
@@ -122,8 +87,8 @@ export default {
     portClick() {
       this.$router.push('/port')
     },
-    macClick() {
-      this.$router.push('/mac')
+    ipClick() {
+      this.$router.push('/ip')
     },
     balanceClick() {
       this.$router.push('/balance')
@@ -164,8 +129,7 @@ export default {
   }
 }
 .el-main {
-  // background-color: #eaedf1;
-  background-color:skyblue
+  background-color: #eaedf1;
 }
 .iconfont {
   margin-right: 10px;
