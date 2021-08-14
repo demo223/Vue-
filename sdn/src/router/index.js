@@ -14,13 +14,9 @@ const Welcome = () => import('../components/Welcome.vue')
 
 const User = () => import('../components/User.vue')
 const Chart = () => import('../components/Chart.vue')
-const Tuopu = () => import('../components/Tuopu/Tuopu.vue')
-const Table1 = () => import('../components/Tuopu/Table1.vue')
-const Table2 = () => import('../components/Tuopu/Table2.vue')
-const Table3 = () => import('../components/Tuopu/Table3.vue')
-const Port = () => import('../components/Port.vue')
-const Ip = () => import('../components/Ip.vue')
 const Balance = () => import('../components/Balance.vue')
+const Card = () => import('../components/Card.vue')
+
 
 Vue.use(VueRouter)
 
@@ -35,13 +31,8 @@ const routes = [
       { path: '/welcome', component: Welcome },
       { path: '/user', component: User },
       { path: '/chart', component: Chart },
-      { path: '/tuopu', component: Tuopu },
-      { path: '/table1', component: Table1 },
-      { path: '/table2', component: Table2 },
-      { path: '/table3', component: Table3 },
-      { path: '/port', component: Port },
-      { path: '/ip', component: Ip },
       { path: '/balance', component: Balance },
+      { path: '/card', component: Card },
     ],
   },
 ]

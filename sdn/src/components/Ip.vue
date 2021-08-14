@@ -60,7 +60,6 @@ export default {
   justify-content: center;
   width: 100%;
   height: 100%;
-  /* background-image: url('../assets/img/登陆背景.jpg'); */
 }
 
 #mac_form {

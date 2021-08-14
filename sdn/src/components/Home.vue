@@ -1,69 +1,63 @@
+// 主页界面
 <template>
   <el-container>
-    <!-- 头部 -->
     <el-header>
-      <div>
-        <img src="../assets/img/登录头像.png" alt="当前用户" />
-        <span id="theme">校园网的负载均衡管理系统</span>
+      <div class="header-left">
+        <el-button type="primary" icon="el-icon-setting">设置</el-button>
       </div>
-      <el-button type="info" @click="logout">登出</el-button>
+      <h2>校园网管理系统</h2>
+      <div class="header-right">
+        <el-dropdown trigger="click">
+          <span class="el-dropdown-link">
+            <img id="header-user" src="../assets/img/登录头像.png" alt="logo" />
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+            <el-dropdown-item>首页</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </el-header>
-    <!-- 主体 -->
     <el-container>
-      <!-- 侧边栏 -->
-      <!-- <el-aside :width="isCollapse ? '64px' : '200px'"> -->
       <el-aside width="200px">
-        <!-- <div class="toggle-button" @click="togleCollapse">展开/收起</div> -->
-        <el-col :span="12">
-          <!-- <h5>自定义颜色</h5> -->
-          <el-menu
-            default-active="$route.path"
-            class="el-menu-vertical-demo"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="skyblue"
-          >
-            <el-menu-item index="1" id="user" @click="userClick">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">用户管理</span>
-            </el-menu-item>
-            <el-menu-item index="2" id="chart" @click="chartClick">
-              <i class="el-icon-view"></i>
-              <span slot="title">流量监控</span>
-            </el-menu-item>
-            <el-menu-item index="3" id="tuopu" @click="tuopuClick">
-              <i class="el-icon-tickets"></i>
-              <span slot="title">拓扑信息</span>
-            </el-menu-item>
-            <el-menu-item index="4" @click="portClick">
-              <i class="el-icon-s-operation"></i>
-              <span slot="title">匹配端口</span>
-            </el-menu-item>
-            <el-menu-item index="5" id="ip" @click="ipClick">
-              <i class="el-icon-s-platform"></i>
-              <span slot="title">匹配ip地址</span>
-            </el-menu-item>
-            <el-menu-item index="6" id="balance" @click="balanceClick">
-              <i class="el-icon-rank"></i>
-              <span slot="title">负载均衡</span>
-            </el-menu-item>
-          </el-menu>
-        </el-col>
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+        >
+          <!-- 流量监控 -->
+          <el-menu-item index="1" @click="userClick">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户管理</span>
+          </el-menu-item>
+          <el-menu-item index="2" @click="chartClick">
+            <i class="el-icon-odometer"></i>
+            <span slot="title">流量监控</span>
+          </el-menu-item>
+          <el-menu-item index="3" @click="balanceClick">
+            <i class="el-icon-rank"></i>
+            <span slot="title">负载均衡</span>
+          </el-menu-item>
+          <el-menu-item index="4" @click="cardClick">
+            <i class="el-icon-setting"></i>
+            <span slot="title">card</span>
+          </el-menu-item>
+        </el-menu>
       </el-aside>
-      <!-- 内容主体 -->
+      <!-- 主界面展示区 -->
       <el-main>
         <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
-
 <script>
 export default {
   data() {
-    return {
-      
-    }
+    return {}
   },
   // created () {
   //   this.getMenuList()
@@ -71,8 +65,6 @@ export default {
   // },
   methods: {
     logout() {
-      // 清空token
-      window.sessionStorage.clear()
       this.$router.push('/login')
     },
     userClick() {
@@ -81,17 +73,11 @@ export default {
     chartClick() {
       this.$router.push('/chart')
     },
-    tuopuClick() {
-      this.$router.push('/tuopu')
-    },
-    portClick() {
-      this.$router.push('/port')
-    },
-    ipClick() {
-      this.$router.push('/ip')
-    },
     balanceClick() {
       this.$router.push('/balance')
+    },
+    cardClick() {
+      this.$router.push('/card')
     },
   },
 }
@@ -101,53 +87,72 @@ export default {
 .el-container {
   height: 100%;
 }
+
 .el-header {
-  background-color: #373f41;
   display: flex;
   justify-content: space-between;
-  padding-left: 0;
   align-items: center;
+  background-color: #373f41;
+  padding-left: 10px;
   color: #fff;
   font-size: 20px;
-  > div {
-    display: flex;
-    align-items: center;
-    img {
-      height: 40px;
-    }
-    span {
-      margin-left: 15px;
-    }
+  > div img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
   }
 }
+
 .el-aside {
   background-color: #333744;
-
   .el-menu {
     border: none;
     min-width: 200px;
   }
 }
+
 .el-main {
   background-color: #eaedf1;
 }
-.iconfont {
-  margin-right: 10px;
-}
-.toggle-button {
-  background-color: #4a5064;
-  font-size: 10px;
-  line-height: 24px;
-  color: #fff;
-  text-align: center;
-  letter-spacing: 0.2em;
-  // 鼠标放上去变成小手
-  cursor: pointer;
-}
 </style>
 
+
+// 卡片设置
 <style>
-#theme {
-  margin-left: 605px;
+.box-card {
+  width: 300px;
+  height: 160px;
+}
+
+/* .clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+} */
+/* .clearfix:after {
+  clear: both;
+} */
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.box-card-content {
+  float: right;
+  height: 100px;
+  /* background-color: skyblue; */
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+  padding: 20px 0;
+}
+.box-card-content-name {
+  color: rgba(0, 0, 0, 0.45);
+}
+.box-card-content-number{
+  margin-top: 10px;
+      color: #666;
 }
 </style>
