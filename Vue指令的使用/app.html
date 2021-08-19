@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue练习</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- view视图区域 -->
+
+    <hr>
+    <!-- 内容渲染指令-->
+    <!-- v-text -->
+    <h1 v-text="name"></h1>
+    <h1 v-text="name">姓名:</h1> <!-- 缺点：这里的“姓名”会被覆盖 -->
+    <!-- {{}} -->
+    <h1>姓名: {{name}}</h1> <!-- 这里的“姓名”会被覆盖 -->
+    <p v-html='info'></p> <!-- 要把包含 HTML 标签的字符串渲染为页面的 HTML 元素 -->
+    <hr>
+
+    <!-- 属性绑定指令 -->
+    <input type="text" :placeholder="name"> <!-- 给元素动态绑定一个动态的placeholder属性值 -->
+    <input type="text" :placeholder="name+','+age"> <!-- 支持 Javascript 表达式的运算 -->
+    <input type="text" :placeholder="count">
+    <hr>
+
+    <!-- 事件绑定指令 -->
+    <p>当前的count：{{count}}</p>
+    <button @click="add">+1</button> <!-- 无参情况 -->
+    <button @click="addn(5)">+5</button> <!-- 传参 -->
+    <button @click="addEvent(3,$event)">+3</button> <!-- $event 可以解决事件参数对象event被覆盖的问题 -->
+    <hr>
+    <!-- 事件修饰符 -->
+    <form @submit.prevent="onSubmit1">
+      <input type="submit" value="提交"> <!-- 由于表单提交的时候会默认提交，这里我们需要阻止默认提交 -->
+    </form>
+    <div @click="divClick" style="width: 200px; height: 200px; background-color: skyblue;">
+      <button @click.stop="btnClick" style="margin: 20px;">div中的一个按钮</button>
+      <!-- 这里点击button会冒泡点击div，阻止冒泡 -->
+      <br>
+      <a @click.prevent.stop="onSubmit2" href="http://www.baidu.com">百度一下</a>
+      <!-- 这里同时阻止超链接跳转和冒泡 -->
+    </div>
+    <hr>
+    <!-- 按键修饰符 -->
+    <input @keyup.enter="submit" @keyup.esc="clear" type="text">按键修饰符
+    <!-- enter键被点击是提交，esc被点击时清空文本框 -->
+    <br>
+    <hr>
+
+    <!-- 双向绑定指令 -->
+    <!-- input中使用 -->
+    <input type="text" v-model="count">v-model指令 <br> <!-- 双向绑定 -->
+    <input type="text" :value="count">v-bind指令 <br> <!-- 单向绑定，只有数据源到页面 -->
+    <!-- select中使用 -->
+    <select name="水果" v-model="fruit">
+      <option value="">你最喜欢的水果是：</option>
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="草莓">草莓</option>
+    </select>
+    <br>
+    <!-- v-model的指令修饰符 -->
+    <!-- 只能输入数字，除去前面和后面的空格的 -->
+    <input type="text" v-model.number="a"> + <input type="text" v-model.number="b"> = <span>{{a+b}}</span>
+    <br>
+    <input type="text" v-model.trim="count">除去前，后面的空格
+    <br>
+    <input type="text" v-model.lazy="count">失去焦点时更新数据
+    <hr>
+
+    <!-- 条件渲染指令 -->
+    <span v-if="count >= 5">v-if是否显示</span> <br> <!-- 直接移除dom元素 -->
+    <span v-show="count >= 5">v-else是否显示</span> <!-- 相当于在style样式里面添加display:none -->
+    <p v-if="grade == 'A'">优秀</p>
+    <p v-else-if="grade == 'B'">良好</p>
+    <p v-else-if="grade == 'C'">一般</p>
+    <p v-else="grade == 'D'">差</p>
+    <hr>
+
+    <!-- 列表渲染指令 -->
+    <ul>
+      <li v-for="item in people">身份信息: {{item.id}},{{item.name}},{{item.gender}}</li>
+    </ul>
+    <ul>
+      <li v-for="(item,index) in people">{{index}} 身份信息: {{item.id}},{{item.name}},{{item.gender}}</li>
+    </ul>
+    <!-- 必须添加唯一的 key 属性 -->
+    <ul>
+      <li v-for="(item,index) in people" :key="item.id">{{index}} 身份信息: {{item.id}},{{item.name}},{{item.gender}}</li>
+    </ul>
+    <hr>
+
+    <!-- 过滤器 -->
+    <p>将message转换为大写字母: {{message | capital}}</p>
+
+    <!-- 监听器 -->
+    <input type="text" v-model="name">监听name的变化 <br>
+    <!-- 监听 username 值的变化，并使用 axios 发起 Ajax 请求，检测当前输入的用户名是否可用： -->
+    <input type="text" v-model="username">监听username值的变化 <br>
+    <!-- 监听对象stu中的属性name变化 -->
+    <input type="text" v-model="stu.name">监听对象stu中的属性name变化
+    <hr>
+
+    <!-- 计算属性 -->
+    <div>
+      <input type="text" v-model="r"> <br>
+      <input type="text" v-model="g"> <br>
+      <input type="text" v-model="b"> <br>
+      <div id="box" :style="{backgroundColor:`rgb(${r},${g},${b})`}"></div>
+    </div>
+    <span>{{rgb}}</span> <br> <!-- 计算属性中的rgb属性 -->
+    <button @click="showRgb">rgb获取按钮</button>
+  </div>
+
+  <!-- ----------------------------------------------------------------------------------------------------------------------- -->
+
+  <div id="app2">
+    <h1>{{message | capital | doubleMessage}}</h1>
+  </div>
+
+  <script>
+    /* 全局过滤器 */
+    /* 注意：要在创建 Vue 实例之前全局定义过滤器： */
+    Vue.filter("capital", function (val) {
+      return val.toUpperCase();
+    })
+    Vue.filter("doubleMessage", function (val) {
+      return val + " + " + val;
+    })
+
+    let app = new Vue({ /* new Vue()实例对象得到的就是ViewModel */
+      el: '#app', /* view视图区域 */
+      /* model数据源 */
+      data: {
+        name: 'zhouqi',
+        username: 'admin',
+        info: '<a href="http://www.baidu.com">百度一下</a>',
+        age: 22,
+        count: 0,
+        fruit: '苹果',
+        a: 0,
+        b: 0,
+        r: 0,
+        g: 0,
+        grade: 'A',
+        message: "hello,world",
+        stu: {
+          name: '周岐',
+          age: 22
+        },
+        people: [
+          {
+            id: 1,
+            name: "张三",
+            gender: "男",
+          },
+          {
+            id: 2,
+            name: "李四",
+            gender: "男",
+          },
+          {
+            id: 3,
+            name: "王五",
+            gender: "男",
+          },
+        ]
+      },
+      methods: {
+        add() {
+          this.count++;
+        },
+        addn(n) {
+          this.count += n;
+        },
+        addEvent(n, e) {
+          // /在形参处用e接收传递过来的原生事件参数对象$event
+          this.count += n;
+          console.log(e); /* 输出原生事件对象 */
+        },
+        onSubmit1() {
+          /* ... */
+          return false;
+        },
+        divClick() {
+          console.log("这里点击了div");
+        },
+        btnClick() {
+          console.log('这里点击了button');
+        },
+        onSubmit2() {
+          console.log('点击了div中的超链接');
+          return false;
+        },
+        submit() {
+          console.log("enter按键被点击");
+        },
+        clear(e) {
+          e.target.value = "" /* 将input里面的数据清空 */
+          console.log(e);
+          console.log("esc按键被点击");
+        },
+        showRgb() {
+          console.log(this.rgb);  /* 计算属性中的rgb */
+        }
+      },
+      /* 这里定义的是私有过滤器 */
+      filters: {
+        /* val是"管道符"前面的值 */
+        capital(val) {
+          let str = val.toUpperCase();  /* 将字符串全部转换为大写字母 */
+          return str
+        }
+      },
+      watch: {
+        /* 监听name前后变化 */
+        name(newVal, oldVal) {
+          console.log(newVal, oldVal);
+        },
+        /* 判断输入的用户名是否请求的数据重复 */
+        username: {
+          // handler 是固定写法，表示当 username 的值变化时，自动调用 handler 处理函数
+          handler: async function (newVal) {
+            if (newVal === '') return
+            const { data: res } = await axios.get('https://www.escook.cn/api/finduser/' + newVal)
+            console.log(res)
+          },
+          // 表示页面初次渲染好之后，就立即触发当前的 watch 侦听器
+          immediate: true
+        },
+        /* 监听对象stu中的属性name变化 */
+        // 提示：这下面也可以直接写"stu.name":{...}，不用开启deep
+        stu: {
+          handler(newVal) {
+            console.log(newVal.name);
+          },
+          immediate: true,
+          // 开启深度监听
+          deep: true  /* 使用deep才能监听到对象中的属性变化 */
+        },
+      },
+      /* 计算属性 */
+      computed: {
+        rgb() {
+          return `rgb(${this.r},${this.g},${this.b})`
+        }
+      }
+    }
+    )
+
+    let app2 = new Vue({
+      el: "#app2",
+      data: {
+        message: "I love you!"
+      }
+    })
+
+  </script>
+</body>
+
+</html>
